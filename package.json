@@ -7,6 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app"
   },
+  "dependencies" : {
+    "express": "*",
+    "mongoose": "*",
+    "bcryptjs": "*",
+    "cors": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saadbess/mean-stack-template.git"
