@@ -4,11 +4,25 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const config = require('./config/database');
+
+// Connecting to the Mongo database that is stored in a config file
+mongoose.connect(config.database);
+
+// Checking when connected to the database
+mongoose.connection.on('connected', () => {
+    console.log('Connected to database ' + config.database);
+});
+
+// Checking if any errors in the database
+mongoose.connection.on('error', (err) => {
+    console.log('Database error: ', + err );
+});
 
 // Initialising app variable with express
 const app = express();
 
-// User routes in a seperate file
+// Bringing in users folder from the routes folder
 const users = require('./routes/users');
 
 // Port variable
@@ -16,6 +30,9 @@ const port = 3000;
 
 // Cors middleware allows to make requests to api from a different domain name
 app.use(cors());
+
+// Static folder
+app.use(express.static(path.join(__dirname, 'client')));
 
 // Body parser middleware
 app.use(bodyParser.json());
